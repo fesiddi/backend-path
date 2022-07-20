@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- CSS only -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+        <title>Url Shortener Microservice</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Url Shortener Microservice</h1>
+            <form action="/api/shorturl/" method="POST" class="my-4">
+                <label for="originalUrl" class="sr-only">URL to Shorten</label>
+                <input
+                    placeholder="Url to shorten"
+                    type="url"
+                    name="originalUrl"
+                    id="originalUrl"
+                />
+                <button type="submit">Post Url</button>
+            </form>
+            <div><br /></div>
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Original Url</th>
+                        <th>Short Url</th>
+                        <th>Delete Url</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach(db_url => { %>
+                    <tr>
+                        <td>
+                            <a href="<%= db_url.originalUrl %>"
+                                ><%= db_url.originalUrl %></a
+                            >
+                        </td>
+                        <td>
+                            <a href="api/shorturl/<%= db_url.shortUrl %>"
+                                ><%= db_url.shortUrl %></a
+                            >
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
